@@ -3,6 +3,7 @@
  * Первый параметр при запуске скрипта должен быть url видео
  * Пример:
  * node index.js https://rutube.ru/video/bb2a7557a09fbe3d63f74dd98aef3551/
+ * node index.js https://rutube.ru/video/29085a3569472fab6ee8d8af0262758a/
  * 
  */
 if(!process.argv[2]){
@@ -30,7 +31,7 @@ const sanitize = require('sanitize-filename');
 
 const processTitle = process.title;
 
-const regex_rutube = /^https?:\/\/rutube\.ru\/video\/(\w+)/;
+const regex_rutube = /^https?:\/\/rutube\.ru\/(?:video|shorts)\/(\w+)\/?/;
 
 const streamPipeline = util.promisify(stream.pipeline);
 
@@ -252,7 +253,7 @@ const createDir = function(dir) {
 	process.title = __dirname;
 	console.log("\u00A0");
 	console.log("\u00A0\u00A0\u00A0" + _colors.bgWhite(_colors.white("█████████████████")) + "\u00A0");
-	console.log("\u00A0\u00A0\u00A0" + _colors.bgRed(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
-	console.log("\u00A0\u00A0\u00A0" + _colors.bgBlue(_colors.blue("█████████████████")) + "\u00A0");
+	console.log("\u00A0\u00A0\u00A0" + _colors.bgBlue(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
+	console.log("\u00A0\u00A0\u00A0" + _colors.bgRed(_colors.blue("█████████████████")) + "\u00A0");
 	console.log("\u00A0");
 }());

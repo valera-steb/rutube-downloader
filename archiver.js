@@ -4,7 +4,10 @@
 const fs = require('node:fs'),
 	path = require('node:path'),
 	archiver = require('archiver'),
-	delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	delay = ms => new Promise(resolve => setTimeout(resolve, ms)),
+	log = function(){
+
+	};
 
 (async function(){
 	console.log(" ");
