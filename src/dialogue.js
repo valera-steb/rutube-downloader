@@ -7,10 +7,15 @@ module.exports = {
     }),
 
     selectVideoQuality: (cfg, playlists) => {
+        const widthList = [];
         const qualitiesOptions = playlists.map(({ attributes }, index) => {
             const { width, height } = attributes.RESOLUTION;
+            widthList.push(width);
             return `${index} : ${width}x${height} ${attributes.CODECS}`;
         });
+
+        if (!cfg.manualVideoQuality)
+            return [playlists[findMaxIndex(widthList)]["uri"], {}];
 
         if (cfg.quality) {
             const selectedIndex = qualitiesOptions.indexOf(cfg.quality.label);
@@ -33,3 +38,18 @@ module.exports = {
         );
     },
 };
+
+function findMaxIndex(arr) {
+    let max = arr[0],
+        maxIndex = 0;
+
+    for (let i = 1, l = arr.length; i < l; i++) {
+        const el = arr[i];
+        if (el > max) {
+            max = el;
+            maxIndex = i;
+        }
+    }
+
+    return maxIndex;
+}

@@ -9,6 +9,7 @@ exports.parseArgs = args => {
         currentFileIndex: 0,
         files: [],
         parallelSegments: 5,
+        manualVideoQuality: false,
     };
 
     if (args.length < 3) {
@@ -34,11 +35,12 @@ exports.parseArgs = args => {
 
 const help = [
     " ",
-    "Использовать: node index.js url1 [url2] [url3 -t custom_title] [url4] [...]",
+    "Использовать: node index.js url1 [url2] [url3 -t custom_title] [url4] [...] [-p 10] [-q]",
     " ",
     "Опции:",
     " -t <title> \t задать имя файла для предыдущего url",
     " -p <int> \t количество одновременных загрузок, по умолчанию 5",
+    " -q \t\t скрипт будет спрашивать о том, какого качества видео загружать, по умолчанию выбирает наилучшее",
     " -h \t\t отобразить справку",
     " ",
     "Примеры использования:",
@@ -51,7 +53,7 @@ const help = [
     "+ загрузить несколько файлов",
     "node index.js https://rutube.ru/video/ba1f267bcff6a3529889a6dd08bfb764/" +
         " https://aser.pro/content/stream/podnyatie_urovnya_v_odinochku/001_29006/hls/index.m3u8 -t 'Поднятие уровня в одиночку серия 01'" +
-        " https://rutube.ru/video/342af3c3cbba19c9a95252fc27bc60a4/",
+        " https://vkvideo.ru/video-18255722_456244249",
     " ",
 ];
 
@@ -79,6 +81,9 @@ function tryMatchOption(state, option, value) {
                     "Количество одновременных загрузок должно быть числом больше 0"
                 );
             return;
+
+        case "-q":
+            return (state.manualVideoQuality = true);
 
         case "-h":
             showHelp();

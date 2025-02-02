@@ -22,6 +22,7 @@ async function run() {
             title: file.title,
             parallelNum: state.parallelSegments,
             url: file.url,
+            manualVideoQuality: state.manualVideoQuality,
             quality: state.quality,
         };
 
