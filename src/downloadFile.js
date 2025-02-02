@@ -20,9 +20,7 @@ const existsCount = list =>
 
 const joinNames = list => ({ filename: list.join(", ") });
 
-exports.downloadFile = async function (cfg, segments) {
-    segments = segments.slice(10, 13);
-
+exports.downloadFile = async function (cfg, segments, options) {
     await createDir(cfg.video);
     await deleteFiles(/^segment-.*\.ts/, cfg.video);
 
@@ -50,7 +48,11 @@ exports.downloadFile = async function (cfg, segments) {
                 joinNames(activeSegmentsNums)
             );
 
-            const error = await downloadSegment(segmentUrl, segmentFilePath);
+            const error = await downloadSegment(
+                segmentUrl,
+                segmentFilePath,
+                options
+            );
             if (error) {
                 progress.update(existsCount(arrFiles), {
                     filename: "NO SAVE: " + _colors.redBright(segmentFileName),
@@ -121,9 +123,9 @@ exports.downloadFile = async function (cfg, segments) {
     return videoFileName;
 };
 
-async function downloadSegment(segmentUrl, segmentFilePath) {
+async function downloadSegment(segmentUrl, segmentFilePath, options) {
     try {
-        let rs = await fetch(segmentUrl);
+        let rs = await fetch(segmentUrl, options);
         if (rs.ok) {
             await streamPipeline(
                 rs.body,

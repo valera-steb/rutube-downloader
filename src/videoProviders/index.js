@@ -1,4 +1,8 @@
-const videoProviders = [require("./aserPro"), require("./rutube")];
+const videoProviders = [
+    require("./aserPro"),
+    require("./rutube"),
+    require("./vk"),
+];
 
 exports.selectVideoProvider = function (url) {
     for (let provider of videoProviders) {

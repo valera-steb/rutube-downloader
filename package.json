@@ -6,12 +6,10 @@
   "scripts": {
     "test": "npm i"
   },
-  "author": [
-    {
-      "name": "ProjectSoft",
-      "email": "projectsoft2009@yandex.ru"
-    }
-  ],
+  "author": {
+    "name": "ProjectSoft",
+    "email": "projectsoft2009@yandex.ru"
+  },
   "contributors": [
     {
       "name": "valera-steb",
@@ -22,6 +20,7 @@
   "dependencies": {
     "ansi-colors": "4.1.3",
     "cli-progress": "3.12.0",
+    "encoding": "0.1.13",
     "m3u8-parser": "7.1.0",
     "node-fetch": "2.7.0",
     "sanitize-filename": "1.6.3",
